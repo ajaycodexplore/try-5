@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html,body{
+          height: 100%;
+          width: 100%;
+      }
+      *{
+          margin: 0%;
+          padding: 0%;
+          box-sizing: border-box;
+      }
+      .root{
+          display: flex;
+          padding-right: 15px;
+      }
+      .sidebar{
+          background-color: #f7e7e7 ;
+          display: flex;
+          padding: 0 6vw;
+          flex-direction: column;
+          padding-top: 150px;
+          
+      }
+      .content{
+          padding: 0 1.5vw;
+      }
+      .sideCon{
+          color: rebeccapurple;
+          margin: 15px;
+      }
+      #menu-icon{
+          display: block;
+          cursor: pointer;
+      }
+      .rounded-button {
+background-color: #4CAF50;
+color: #fff;
+padding: 12px 24px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+}
+
+.rounded-button:hover {
+background-color: #3e8e41;
+}
+  /* media query mobile*/
+  @media (max-width: 600px) {
+      #menu-icon{
+          display:block ;
+      }
+  }
+  .sidebar{
+      display: none;
+  }
+  .open{
+      display: block;
+  } 
+  /* for laptop */
+  @media (min-width: 600px){
+.sidebar{
+    height: 100vh;
+}
+  }
+.beautiful-link {
+  position: relative;
+  display: inline-block;
+  color: #3498db; /* Blue color */
+  text-decoration: none; /* Remove default underline */
+  font-size: 18px; /* Font size */
+  font-weight: bold; /* Font weight */
+  transition: color 0.3s ease-in-out; /* Transition effect */
+}
+  </style>
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+  integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+/>
+  </head>
+  <body>
+    <div class="root">
+        <div class="sidebar" onclick="sideBarClicked()">
+            <a href="/" class="beautiful-link">TCP</a>
+            <a href="/second" class="beautiful-link">UDP</a>
+        </div>
+        <div class="content" style="padding-top: 20px;">
+            <span onclick="getData()"><i class="fa-solid fa-bars icon-menu" id="menu-icon"></i></span>
+            <h1 style="text-align: center;">UDP</h1>
+            <%plainText2.content.forEach(element => {%>
+                <%if(element.content==false){%>
+               <% } else if (element.content){ %>
+                    <p><%=element.content[0].value%></p>
+               <% } else if(element.value){ %>
+                    <p><%=element.value%></p>
+              <% }%>
+             <% })%>
+             <div style="text-align: center;margin: 2vh 0;"><a href="/"><button class="rounded-button">Back</button></a></div>
+          </div>
+    </div> 
+
+    <script>
+      const getData = ()=>{
+          const sidebar = document.querySelector('.sidebar')
+          if(sidebar.classList[1]=='open') sidebar.classList.remove('open');
+          else {sidebar.classList.add('open');}
+      }
+      const sideBarClicked = ()=>{
+          const sidebar = document.querySelector('.sidebar')
+          sidebar.classList.remove('open');
+      }
+
+  </script>
+  </body>
+</html>

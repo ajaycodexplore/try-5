@@ -1,0 +1,61 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2759
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red247\green247\blue247;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c97647\c97647\c97647;\cssrgb\c0\c0\c0;}
+\margl1440\margr1440\vieww16660\viewh16940\viewkind0
+\deftab720
+\pard\tx3413\pardeftab720\partightenfactor0
+
+\f0\fs22\fsmilli11440 \cf0 \cb2 \expnd0\expndtw0\kerning0
+In this section we will be discussing how TCP connects management is handled.\
+\
+Any TCP connection involves the below 3 stages:\
+\
+A) Connection initiation\
+B) Data exchange\
+C) Connection termination.\
+\
+The TCP segments exchanged for a connection initiation are shown below:\
+\
+One of the system initiates the connection. Usually this machine is called the client and also sometimes referred to as active opener. The other end is referred to as Server or Passive Opener.\
+\
+The below are the TCP segments involved in making a connection.\
+\
+A) Client sends a SYN segment with an Initial Sequence Number(ISN(c)). This is the starting sequence number which the client wants to use and acknowledged by the server. This segment usually is SYN bit enabled in the TCP header. The ACK bit is not enabled or sent here. This segment should provide the port number of the other end to which connection is being established. This port number is used by the TCP protocol on the other end to connect to that port. Usually this would be well known port (like port 80 for a HTTP connection to a web server etc).  This is the first segment that is exchanged. SYN consumes one sequence number.\
+\
+B) Server sends back a SYN + ACK segment in which both SYN and ACK are enabled. The sequence number is something new like ISN(s) which the other end wants to use as the starting one for all the sequences sent in the other direction. The acknowledgement is usually ISN(c) + 1., This is usually the second segment that is exchanged.\
+\
+C) The client should ACK back the SYN + ACK sent by the server. The ACK has a sequence number of ISN(c) + 1 and acknowledgment of ISN(s) + 1. This is the third segment that is exchanged. A two way connection is established once this step has been accomplished and is usually the common way of initiating a connection. In the future sections, we will see other variants that are possible too.\
+\
+As you see, three segments are required to establish a TCP connection. This process is usually called the three-way handshake in the protocol world.\
+\
+\
+Once the connection is established, the client and server can exchange data. Once the data exchanged is completed, there is a need to terminate the connection forever. This is accomplished by exchanging 4 TCP segments as shown in the below diagram.\
+\
+\
+A) Client sends a FIN segment, shorthand for FINISH. The FIN flag in the TCP header is enabled here. Usually an ACK for the last data segment sent from server to client is ACKed here. So this is going to be a FIN + ACK segment. Let say the ACK is for L segment. This segment will have a sequence number of some K and an acknowledgement of L. Here the acknowledgement is not L + 1 as is the case otherwise. Since there is the last segment that is exchanged for this connection, this is just L. This is the first segment exchanged in connection termination.\
+\
+B) Once a FIN is received, the server understands that the client wants to close the connection and it will not receive any further data. Server should respond back with an ACK to the FIN segment. This ACK will have a acknowledgement  of K + 1, as a FIN in the previous step, consumes one sequence number and a sequence number of L. This is the second segment that is exchanged.\
+\
+Exchange of the above 2 packets terminates the connection between client and server, but not the one between server and client. Remember that TCP is a dual connection protocol, there will be two connections open one in each direction and data can flow simultaneously in both connections. One of these connection can be closed while the other is open. This condition is usually referred to as half-close.\
+\
+Let say the passive closer wants to close the connection too. This can happen much later than the two steps discussed above.\
+\
+C)  Server sends a FIN request with sequence number of L and acknowledgement of K + 1.\
+\
+D) The passive closer should respond back with an ACK with sequence number of K and acknowledgement of L + 1\
+\
+As you see, connection termination needs 4 TCP segments while connection establishment takes only 3.\
+\
+One of the below ways can terminate the connection:\
+\
+A) Use close() or exit() function\'92s in the code\
+B) Kill the process using kill command\
+C) Ctrl + C on the screen running the process\
+\
+ \
+Note: Using shutdown() instead does a Half close termination.\
+\
+\
+\
+}

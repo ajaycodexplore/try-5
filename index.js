@@ -4,7 +4,7 @@ const rtfParser = require("rtf-parser");
 app.set("view engine", "ejs");
 const fs = require("fs");
 app.get("/", (req, res) => {
-  fs.readFile("tcp_conn_mgmt.rtf", "utf8", (err, data) => {
+  fs.readFile("public/tcp_conn_mgmt.rtf", "utf8", (err, data) => {
     if (err) {
       res.send(err);
       return;
@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/second", (req, res) => {
-  fs.readFile("tcp_header_fields.rtf", "utf8", (err, data) => {
+  fs.readFile("public/tcp_header_fields.rtf", "utf8", (err, data) => {
     if (err) {
       res.send(err);
       return;

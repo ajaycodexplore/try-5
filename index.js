@@ -7,8 +7,7 @@ const fs = require("fs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, 'public')));
 app.get("/", (req, res) => {
-  const filePath = path.join(__dirname, "public", "tcp_conn_mgmt.rtf");
-  fs.readFile(filePath, "utf8", (err, data) => { //const filePath = path.join(__dirname, "public", "tcp_conn_mgmt.rtf");
+  fs.readFile("tcp_conn_mgmt.rtf", "utf8", (err, data) => { 
     if (err) {
       res.send(err)
       return;
@@ -22,8 +21,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/second", (req, res) => {
-  const filePath2 = path.join(__dirname, "public", "tcp_conn_mgmt.rtf")
-  fs.readFile(filePath2, "utf8", (err, data) => { //const filePath2 = path.join(__dirname, "public", "tcp_conn_mgmt.rtf");
+  fs.readFile("tcp_header_fields.rtf", "utf8", (err, data) => {
     if (err) {
       res.send(err);
       return;

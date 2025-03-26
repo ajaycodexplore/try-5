@@ -7,9 +7,10 @@ const fs = require("fs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, 'public')));
 app.get("/", (req, res) => {
-  fs.readFile("public/tcp_conn_mgmt.rtf", "utf8", (err, data) => {
+  const filePath = path.join(__dirname, "public", "tcp_conn_mgmt.rtf");
+  fs.readFile(filePath, "utf8", (err, data) => { //const filePath = path.join(__dirname, "public", "tcp_conn_mgmt.rtf");
     if (err) {
-      res.send(err);
+      res.send(err)
       return;
     }
     rtfParser.string(data, (err, plainText) => {
@@ -21,7 +22,8 @@ app.get("/", (req, res) => {
 });
 
 app.get("/second", (req, res) => {
-  fs.readFile("public/tcp_header_fields.rtf", "utf8", (err, data) => {
+  const filePath2 = path.join(__dirname, "public", "tcp_conn_mgmt.rtf")
+  fs.readFile(filePath2, "utf8", (err, data) => { //const filePath2 = path.join(__dirname, "public", "tcp_conn_mgmt.rtf");
     if (err) {
       res.send(err);
       return;

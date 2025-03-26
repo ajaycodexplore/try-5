@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const rtfParser = require("rtf-parser");
 app.set("view engine", "ejs");
-const path = require('path')
+const path = require('path');
 const fs = require("fs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, 'public')));

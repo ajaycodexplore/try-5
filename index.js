@@ -2,7 +2,9 @@ const express = require("express");
 const app = express();
 const rtfParser = require("rtf-parser");
 app.set("view engine", "ejs");
+const path = require('path')
 const fs = require("fs");
+app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, 'public')));
 app.get("/", (req, res) => {
   fs.readFile("public/tcp_conn_mgmt.rtf", "utf8", (err, data) => {
